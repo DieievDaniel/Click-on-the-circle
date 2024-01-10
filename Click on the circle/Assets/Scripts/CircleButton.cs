@@ -1,14 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CircleButton : MonoBehaviour
 {
-    public CircleManager circleManager;
-    private void OnMouseDown()
+    public CircleManager circleManager; 
+
+    private void Start()
     {
         
-        Destroy(gameObject);
-        circleManager.RemoveCircle(gameObject);
+        Button button = GetComponent<Button>();
+
+        
+        if (button != null)
+        {
+            
+            button.onClick.AddListener(OnButtonClick);
+        }
+    }
+
+
+    
+    public void OnButtonClick()
+    {
+        
+
+        GameObject circle = transform.parent.gameObject;
+
+        if (circleManager != null)
+        {
+
+            
+            circleManager.RemoveCircle(circle);
+           
+        }
     }
 }

@@ -20,17 +20,14 @@ public class CircleManager : MonoBehaviour
     private IEnumerator SpawnCircles()
     {
         RectTransform canvasRect = canvasPrefab.GetComponent<RectTransform>();
-        float canvasHalfWidth = canvasRect.sizeDelta.x / 2f;
-        float canvasHalfHeight = canvasRect.sizeDelta.y / 2f;
-
-        float circleHalfWidth = circlePrefab.GetComponent<RectTransform>().sizeDelta.x / 2f;
-        float circleHalfHeight = circlePrefab.GetComponent<RectTransform>().sizeDelta.y / 2f;
 
         while (true)
         {
+            float circleRadius = circlePrefab.GetComponent<RectTransform>().sizeDelta.x * circlePrefab.transform.localScale.x / 2f;
+
             Vector2 spawnPosition = new Vector2(
-                canvasPrefab.transform.position.x + Random.Range(-canvasHalfWidth + circleHalfWidth, canvasHalfWidth - circleHalfWidth),
-                canvasPrefab.transform.position.y + Random.Range(-canvasHalfHeight + circleHalfHeight, canvasHalfHeight - circleHalfHeight)
+                Random.Range(circleRadius, canvasRect.sizeDelta.x - circleRadius),
+                Random.Range(circleRadius, canvasRect.sizeDelta.y - circleRadius)
             );
 
             GameObject circle = Instantiate(circlePrefab, spawnPosition, Quaternion.identity, canvasPrefab.transform);
@@ -72,5 +69,6 @@ public class CircleManager : MonoBehaviour
     public void RemoveCircle(GameObject circle)
     {
         activeCircles.Remove(circle);
+        Destroy(circle);
     }
 }
