@@ -14,7 +14,6 @@ public class CircleManager : MonoBehaviour
 
     private void Start()
     {
-        
 
         countdownTimer.OnCountdownFinished.AddListener(Coroutines);
     }

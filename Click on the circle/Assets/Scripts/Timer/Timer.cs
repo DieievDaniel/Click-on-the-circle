@@ -13,24 +13,7 @@ public class Timer : MonoBehaviour
     {
         StartCoroutine(StartTimer());
     }
-    //private void Update()
-    //{
-    //    if (canInteract)
-    //    {
-    //        if (timer > 0)
-    //        {
-
-    //            timer -= Time.deltaTime;
-    //            timerText.text = Mathf.CeilToInt(timer).ToString("00");
-    //        }
-    //        else
-    //        {
-    //            Time.timeScale = 0f;
-    //            canInteract = false;
-    //            DisableCircles();
-    //        }
-    //    }
-    //}
+ 
     public IEnumerator StartTimer()
     {
         if (canInteract)
