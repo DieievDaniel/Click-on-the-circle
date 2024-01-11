@@ -10,8 +10,16 @@ public class CircleManager : MonoBehaviour
     public Canvas canvasPrefab;
 
     private List<GameObject> activeCircles = new List<GameObject>();
+    public CountdownTimer countdownTimer;
 
     private void Start()
+    {
+        
+
+        countdownTimer.OnCountdownFinished.AddListener(Coroutines);
+    }
+
+    public void Coroutines()
     {
         StartCoroutine(SpawnCircles());
         StartCoroutine(AutoDestroyCircle());
