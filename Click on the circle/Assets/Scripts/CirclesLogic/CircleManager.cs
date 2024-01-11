@@ -50,6 +50,7 @@ public class CircleManager : MonoBehaviour
         {
             activeCircles.Remove(circle);
             Destroy(circle);
+
         }
     }
 
@@ -68,9 +69,11 @@ public class CircleManager : MonoBehaviour
 
     public void RemoveCircle(GameObject circle)
     {
-        activeCircles.Remove(circle);
-        Destroy(circle);
-
-
+        if (activeCircles.Contains(circle))
+        {
+            activeCircles.Remove(circle);
+            Destroy(circle);
+            Score.scoreValue += 1;
+        }
     }
 }

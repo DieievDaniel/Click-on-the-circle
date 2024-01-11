@@ -5,7 +5,7 @@ public class Timer : MonoBehaviour
 {
     public float timer = 60f;
     public TextMeshProUGUI timerText;
-    public GameObject[] circles; 
+    public GameObject[] circles;
 
     public bool canInteract = true;
 
@@ -21,8 +21,8 @@ public class Timer : MonoBehaviour
             else
             {
                 Time.timeScale = 0f;
-                canInteract = false;               
-                DisableCircles();                
+                canInteract = false;
+                DisableCircles();
             }
         }
     }
@@ -31,16 +31,12 @@ public class Timer : MonoBehaviour
     {
         foreach (GameObject circle in circles)
         {
-           
+
             if (canInteract)
             {
-                circle.SetActive(false);              
+                circle.SetActive(false);
             }
         }
     }
 
-    private void TimerExpired()
-    {
-        Debug.Log("Timer Expired!");
-    }
 }

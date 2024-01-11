@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CircleButton : MonoBehaviour
 {
     public CircleManager circleManager;
-    public Timer timer; 
+    public Timer timer;
     private void Start()
     {
         Button button = GetComponent<Button>();
@@ -17,13 +17,13 @@ public class CircleButton : MonoBehaviour
 
     public void OnButtonClick()
     {
-        
+
         if (timer != null && timer.canInteract)
         {
             GameObject circle = transform.parent.gameObject;
 
             if (circleManager != null)
-            {                
+            {
                 circleManager.RemoveCircle(circle);
             }
         }
