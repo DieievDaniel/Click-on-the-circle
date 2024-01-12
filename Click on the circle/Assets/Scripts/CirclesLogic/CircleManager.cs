@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CircleManager : MonoBehaviour
 {
@@ -11,10 +12,11 @@ public class CircleManager : MonoBehaviour
 
     private List<GameObject> activeCircles = new List<GameObject>();
     public CountdownTimer countdownTimer;
+    
+    
 
     private void Start()
     {
-
         countdownTimer.OnCountdownFinished.AddListener(Coroutines);
     }
 
@@ -83,4 +85,9 @@ public class CircleManager : MonoBehaviour
             Score.scoreValue += 1;
         }
     }
+
+   
+
+    
+
 }

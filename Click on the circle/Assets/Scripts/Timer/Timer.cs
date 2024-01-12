@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Timer : MonoBehaviour
@@ -7,6 +8,8 @@ public class Timer : MonoBehaviour
     public float timer = 60f;
     public TextMeshProUGUI timerText;
     public GameObject[] circles;
+
+    
 
     public bool canInteract = true;
     private void Update()
@@ -26,9 +29,11 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 0f;
+               
                 canInteract = false;
                 DisableCircles();
+
+                GameOver();
             }
         }
     }
@@ -42,6 +47,12 @@ public class Timer : MonoBehaviour
                 circle.SetActive(false);
             }
         }
+    }
+    public void GameOver()
+    {
+        int finalScore = Score.scoreValue;
+        SceneManager.LoadScene("GameOverScreen");
+        PlayerPrefs.SetInt("FinalScore", finalScore);
     }
 
 }

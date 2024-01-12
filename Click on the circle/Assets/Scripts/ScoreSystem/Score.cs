@@ -8,6 +8,7 @@ public class Score : MonoBehaviour
 {
    public static int scoreValue = 0;
    private TextMeshProUGUI score;
+   public GameOverScreen gameOverScreen;
 
     private void Start()
     {
@@ -17,4 +18,5 @@ public class Score : MonoBehaviour
     {
         score.text = "Score: " + scoreValue;
     }
+    
 }
