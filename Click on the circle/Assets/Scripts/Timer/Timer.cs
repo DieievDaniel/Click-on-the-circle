@@ -8,9 +8,6 @@ public class Timer : MonoBehaviour
     public float timer = 60f;
     public TextMeshProUGUI timerText;
     public GameObject[] circles;
-
-    
-
     public bool canInteract = true;
     private void Update()
     {
@@ -32,7 +29,6 @@ public class Timer : MonoBehaviour
                
                 canInteract = false;
                 DisableCircles();
-
                 GameOver();
             }
         }

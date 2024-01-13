@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CircleManager : MonoBehaviour
 {
@@ -12,14 +13,13 @@ public class CircleManager : MonoBehaviour
 
     private List<GameObject> activeCircles = new List<GameObject>();
     public CountdownTimer countdownTimer;
-    
-    
+    [SerializeField] private Color[] circleColors = { Color.red, Color.blue, Color.green, Color.yellow };
+    [SerializeField] private Vector2[] circleSizeRange = { new Vector2(50f, 100f) };
 
     private void Start()
     {
         countdownTimer.OnCountdownFinished.AddListener(Coroutines);
     }
-
     public void Coroutines()
     {
         StartCoroutine(SpawnCircles());
@@ -31,26 +31,34 @@ public class CircleManager : MonoBehaviour
         RectTransform canvasRect = canvasPrefab.GetComponent<RectTransform>();
 
         while (true)
-        {
-            float circleRadius = circlePrefab.GetComponent<RectTransform>().sizeDelta.x * circlePrefab.transform.localScale.x / 2f;
+        {           
+            Color randomColor = circleColors[Random.Range(0, circleColors.Length)];
+            float randomSize = Random.Range(circleSizeRange[0].x, circleSizeRange[0].y);            
+            float circleRadius = randomSize / 2f;
 
             Vector2 spawnPosition = new Vector2(
                 Random.Range(circleRadius, canvasRect.sizeDelta.x - circleRadius),
                 Random.Range(circleRadius, canvasRect.sizeDelta.y - circleRadius)
             );
-
+            
             GameObject circle = Instantiate(circlePrefab, spawnPosition, Quaternion.identity, canvasPrefab.transform);
             activeCircles.Add(circle);
-
+            
             CircleButton circleButton = circle.AddComponent<CircleButton>();
             circleButton.circleManager = this;
+
+            Image circleImage = circle.GetComponent<Image>();
+            if (circleImage != null)
+            {
+                circleImage.color = randomColor;
+                circleImage.rectTransform.sizeDelta = new Vector2(randomSize, randomSize);
+            }
 
             StartCoroutine(DestroyCircleAfterDelay(circle, autoDestroyInterval));
 
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
     private IEnumerator DestroyCircleAfterDelay(GameObject circle, float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -59,7 +67,6 @@ public class CircleManager : MonoBehaviour
         {
             activeCircles.Remove(circle);
             Destroy(circle);
-
         }
     }
 
@@ -85,9 +92,4 @@ public class CircleManager : MonoBehaviour
             Score.scoreValue += 1;
         }
     }
-
-   
-
-    
-
 }
