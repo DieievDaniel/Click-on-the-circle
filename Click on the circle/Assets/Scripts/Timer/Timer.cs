@@ -33,6 +33,7 @@ public class Timer : MonoBehaviour
             }
         }
     }
+
     private void DisableCircles()
     {
         foreach (GameObject circle in circles)

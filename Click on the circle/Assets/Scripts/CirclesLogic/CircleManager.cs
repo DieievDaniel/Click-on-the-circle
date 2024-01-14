@@ -8,24 +8,23 @@ public class CircleManager : MonoBehaviour
     [SerializeField] private GameObject circlePrefab;
     [SerializeField] private float spawnInterval;
     [SerializeField] private float autoDestroyInterval;
-    public Canvas canvasPrefab;
-
-    private List<GameObject> activeCircles = new List<GameObject>();
-    public CountdownTimer countdownTimer;
     [SerializeField] private Color[] circleColors = { Color.red, Color.blue, Color.green, Color.yellow };
     [SerializeField] private Vector2[] circleSizeRange = { new Vector2(50f, 100f) };
+    [SerializeField] private Canvas canvasPrefab;
+    [SerializeField] private CountdownTimer countdownTimer;
+    [SerializeField] private CircleManagerData circleManagerData;
 
-    public CircleManagerData circleManagerData;
+    private List<GameObject> activeCircles = new List<GameObject>();
 
     private void Start()
     {
-        countdownTimer.OnCountdownFinished.AddListener(Coroutines);
+        countdownTimer.OnCountdownFinished.AddListener(EnterCoroutines);
     }
 
-    public void Coroutines()
+    public void EnterCoroutines()
     {
         StartCoroutine(SpawnCircles());
-        StartCoroutine(AutoDestroyCircle());
+        
     }
 
     private IEnumerator SpawnCircles()
@@ -51,60 +50,15 @@ public class CircleManager : MonoBehaviour
 
             Image circleImage = circle.GetComponent<Image>();
             if (circleImage != null)
-            {                
-                yield return StartCoroutine(FadeInCircle(circleImage, randomColor, randomSize));
+            {
+                yield return StartCoroutine(AnimationCircle.FadeInCircle(circleImage, randomColor, randomSize));
             }
+            circleButton.StartAutoDestroy(autoDestroyInterval);
+            circleButton.StartDestroyAfterDelay(circle, autoDestroyInterval);
 
-            StartCoroutine(DestroyCircleAfterDelay(circle, autoDestroyInterval));
 
             yield return new WaitForSeconds(spawnInterval);
         }
-    }
-
-    private IEnumerator DestroyCircleAfterDelay(GameObject circle, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (activeCircles.Contains(circle))
-        {
-            activeCircles.Remove(circle);
-            Destroy(circle);
-        }
-    }
-
-    private IEnumerator AutoDestroyCircle()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(autoDestroyInterval);
-
-            foreach (GameObject circle in activeCircles)
-            {
-                StartCoroutine(DestroyCircleAfterDelay(circle, autoDestroyInterval));
-            }
-        }
-    }
-
-    private IEnumerator FadeInCircle(Image image, Color targetColor, float targetSize)
-    {
-        float duration = 0.3f; 
-        float timer = 0f;
-        Color startColor = image.color;
-        float startSize = image.rectTransform.sizeDelta.x;
-
-        while (timer < duration)
-        {
-            timer += Time.deltaTime;
-            float t = timer / duration;
-
-            image.color = Color.Lerp(Color.clear, targetColor, t);
-            image.rectTransform.sizeDelta = new Vector2(Mathf.Lerp(0f, targetSize, t), Mathf.Lerp(0f, targetSize, t));
-
-            yield return null;
-        }
-
-        image.color = targetColor;
-        image.rectTransform.sizeDelta = new Vector2(targetSize, targetSize);
     }
 
     public void RemoveCircle(GameObject circle)

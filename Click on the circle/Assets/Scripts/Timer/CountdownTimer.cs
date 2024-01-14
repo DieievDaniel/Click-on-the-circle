@@ -30,6 +30,7 @@ public class CountdownTimer : MonoBehaviour
         Destroy(countdownText);
 
         OnCountdownFinished?.Invoke();
+       
     }
    
 

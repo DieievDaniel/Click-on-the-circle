@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c455ecb66ee1b3d44bd6b0884b82782e, type: 3}
   m_Name: CircleData
   m_EditorClassIdentifier: 
-  circlePrefab: {fileID: 0}
+  circlePrefab: {fileID: 4855075803798361269, guid: 2e3dfd3ac32df34459ebe808b41fc085, type: 3}
   spawnInterval: 2
   autoDestroyInterval: 1
-  canvasPrefab: {fileID: 0}
-  countdownTimer: {fileID: 0}
+  canvasPrefab: {fileID: 4806302169131149703, guid: 357fb5de7d73d9d44a1c2b76793e75e8, type: 3}
+  countdownTimer: {fileID: 8719385711628121222, guid: 285a97b99f395b647814e44ef457a560, type: 3}
   circleColors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
