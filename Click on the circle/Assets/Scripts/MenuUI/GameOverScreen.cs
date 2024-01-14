@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameOverScreen : MonoBehaviour
@@ -17,7 +14,6 @@ public class GameOverScreen : MonoBehaviour
     public void Setup(int score)
     {
         gameObject.SetActive(true);
-
         pointText.text = "POINTS: " + score.ToString();
     }
 
@@ -29,6 +25,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void Exit()
     {
+        Score.scoreValue = 0;
         SceneManager.LoadScene("Menu");
     }
 }

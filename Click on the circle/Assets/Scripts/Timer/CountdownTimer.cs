@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 
@@ -28,11 +26,6 @@ public class CountdownTimer : MonoBehaviour
         countdownText.text = "Go!";
         yield return new WaitForSeconds(1f);
         Destroy(countdownText);
-
-        OnCountdownFinished?.Invoke();
-       
-    }
-   
-
-    
+        OnCountdownFinished?.Invoke();       
+    }     
 }

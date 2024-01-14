@@ -12,7 +12,6 @@ public class CircleManager : MonoBehaviour
     [SerializeField] private Vector2[] circleSizeRange = { new Vector2(50f, 100f) };
     [SerializeField] private Canvas canvasPrefab;
     [SerializeField] private CountdownTimer countdownTimer;
-    [SerializeField] private CircleManagerData circleManagerData;
 
     private List<GameObject> activeCircles = new List<GameObject>();
 
@@ -24,7 +23,6 @@ public class CircleManager : MonoBehaviour
     public void EnterCoroutines()
     {
         StartCoroutine(SpawnCircles());
-        
     }
 
     private IEnumerator SpawnCircles()
@@ -55,7 +53,6 @@ public class CircleManager : MonoBehaviour
             }
             circleButton.StartAutoDestroy(autoDestroyInterval);
             circleButton.StartDestroyAfterDelay(circle, autoDestroyInterval);
-
 
             yield return new WaitForSeconds(spawnInterval);
         }

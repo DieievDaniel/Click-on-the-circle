@@ -25,8 +25,7 @@ public class Timer : MonoBehaviour
                 timerText.text = Mathf.CeilToInt(timer).ToString("00");
             }
             else
-            {
-               
+            {      
                 canInteract = false;
                 DisableCircles();
                 GameOver();
@@ -38,7 +37,6 @@ public class Timer : MonoBehaviour
     {
         foreach (GameObject circle in circles)
         {
-
             if (canInteract)
             {
                 circle.SetActive(false);
@@ -51,5 +49,4 @@ public class Timer : MonoBehaviour
         SceneManager.LoadScene("GameOverScreen");
         PlayerPrefs.SetInt("FinalScore", finalScore);
     }
-
 }
