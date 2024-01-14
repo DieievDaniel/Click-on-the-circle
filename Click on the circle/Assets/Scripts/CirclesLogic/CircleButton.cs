@@ -18,7 +18,6 @@ public class CircleButton : MonoBehaviour
     
     public void OnButtonClick()
     {
-
         if (timer != null && timer.canInteract)
         {
             GameObject circle = transform.parent.gameObject;

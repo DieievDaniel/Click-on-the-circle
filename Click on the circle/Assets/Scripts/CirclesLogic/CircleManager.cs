@@ -9,7 +9,7 @@ public class CircleManager : MonoBehaviour
     [SerializeField] private float spawnInterval;
     [SerializeField] private float autoDestroyInterval;
     [SerializeField] private Color[] circleColors = { Color.red, Color.blue, Color.green, Color.yellow };
-    [SerializeField] private Vector2[] circleSizeRange = { new Vector2(50f, 100f) };
+    [SerializeField] private Vector2[] circleSizeRange = { new Vector2(120f, 170f) };
     [SerializeField] private Canvas canvasPrefab;
     [SerializeField] private CountdownTimer countdownTimer;
 
